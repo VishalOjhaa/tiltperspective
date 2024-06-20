@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery</title>
+ 
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+ 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/7.0.1/swiper-bundle.min.css">
+  <link href="https://unpkg.com/swiper/swiper-bundle.min.css">
+  
+  <style>
+ @import 'https://fonts.googleapis.com/css?family=Lato:300,400,700';
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  
+  background: black;
+  color: white;
+  font-size: 14px;
+  font-family: Lato, sans-serif;
+}
+
+img {
+  width: 100%;
+}
+
+.app {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-y: auto; /* Enable vertical scrolling */
+  overflow-x: hidden;
+  scroll-behavior: smooth; /* Enable smooth scrolling */
+  perspective: 1000px;
+}
+
+.gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0 3.6%;
+      padding: 20px;
+      transform-style: preserve-3d;
+      transform: translateX(20vw) translateY(5px) rotateX(30deg) rotateZ(20deg);
+      overflow: hidden;
+      max-height: 100vh; /* Set max-height to fit within viewport */
+      max-width: 50%;
+    }
+    .text {
+      padding: 20px;
+      transform-style: preserve-3d;
+      /* transform: translateX(20vw) translateY(5px) rotateX(30deg) rotateZ(20deg); */
+      transform: translateX(-20vw) translateY(5px) rotateX(10deg) rotateZ(-20deg);
+      overflow-y: auto;
+      max-height: 130vh; /* Adjust to fit content */
+      max-width: 50%; /* Adjust to fit content */
+      margin-left: 600px;
+    }
+    .plantext {
+      padding: 20px;
+      max-height: 130vh; /* Adjust to fit content */
+      max-width: 100%; /* Adjust to fit content */
+      margin-left: 100px;
+    }
+    .imagecontent {
+      padding: 20px;
+      max-height: 130vh; /* Adjust to fit content */
+      max-width: 100%; /* Adjust to fit content */
+    
+    }
+
+.gallery::-webkit-scrollbar,
+.text::-webkit-scrollbar {
+  display: none;
+}
+.item {
+  cursor: pointer;
+  font-size: 0;
+}
+
+.child-images {
+  width: 100%;
+  position: relative;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.3s ease;
+}
+
+.detail.open .child-images {
+  visibility: visible;
+  opacity: 1;
+}
+
+.child-images img {
+  width: 20%;
+  margin: 5px;
+}
+
+.swiper {
+  width: 60%;
+  height: 60%;
+  overflow: visible;
+}
+
+.column {
+  flex-grow: 1;
+  width: 50%;
+  overflow: hidden;
+}
+
+.swiper-container {
+  width: 100%;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  background:black;
+  width: 300px;
+  transition: transform 0.3s ease;
+}
+
+.swiper-slide-prev,
+.swiper-slide-next {
+  transform: scale(0.8);
+}
+
+.swiper-slide-active {
+  transform: scale(1);
+}
+
+.swiper-pagination-bullet {
+  background: #000;
+}
+
+.swiper-pagination-bullet-active {
+  background: #007aff;
+}
+
+.detail .close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 10px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.detail .close-button:hover {
+  background-color: #555;
+}
+
+.detail {
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  width: 80%;
+  cursor: pointer;
+  font-size: 0;
+  display: flex;
+  flex-direction: column;
+  visibility: hidden;
+  height: 80%;
+  overflow: auto;
+}
+
+.detail > img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  display: none;
+}
+
+.detail .content {
+  background: #232323;
+  padding: 8rem 1.5rem;
+  font-size: 1rem;
+  box-sizing: border-box;
+  flex-grow: 1;
+}
+
+.detail .content > * {
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.row {
+  display: flex;
+}
+
+.detail .title {
+  font-size: 2rem;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.detail .secondary {
+  color: lightgray;
+  text-align: center;
+}
+
+.detail .description {
+  line-height: 1.5;
+  text-align: center;
+  margin-left: 60px;
+}
+
+.heading-team{
+    transform-style: preserve-3d;
+    font-size: 120px;
+      transform: translateX(8vw) translateY(130px) rotateX(-30deg) rotateZ(-118deg);
+}
+.team-info{
+  display: flex;
+  font-size: 80px;
+  align-items: center;
+  margin-left: 8vw;
+}
+.team-info ul{
+  list-style-type: none;
+  text-decoration: underline;
+}
+.team-listitems{
+  transform: rotateZ(-30deg);
+}
+/* PROJECTS SECTION */
+.projects-section{
+    margin-top: 10vh;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);                      
+      gap: 0 3.6%;
+      padding: 20px;
+      transform-style: preserve-3d;
+      transform: translateX(20vw) translateY(5px) rotateX(30deg) rotateZ(-30deg);
+      overflow: hidden;
+      max-width: 50%;
+      min-height: 60vh;
+}
+
+/* HOVER ANIMATION ON GALLERY */
+
+.item img {
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Hover animation */
+.item:hover img {
+    transform: scale(1.2);
+}
+
+
+
+
+
+  </style>
+</head>
+<body>
+
+
+  <div class="app">
+
+
+    <div class="projects-section"> 
+      
+        <div class="item" data-title="Owl" data-secondary="Hoo are you?" data-text="Owel lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure cum, est amet delectus, blanditiis voluptatem laborum pariatur consequatur quae voluptate, nisi. Laborum adipisci iste earum distinctio, fugit, quas ipsa impedit.">
+            <img src="img/gallery/kl-owl.png" alt="" />
+            
+            <div class="child-images">
+              <img src="" alt="" data-description="Description for the first child image">
+              <img src="" alt="" data-description="Description for the second image">
+              <img src="" alt="" data-description="Description for the third image">
+              
+            </div>
+            
+          </div>
+          <div class="item" data-title="Owl" data-secondary="Hoo are you?" data-text="Owel lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure cum, est amet delectus, blanditiis voluptatem laborum pariatur consequatur quae voluptate, nisi. Laborum adipisci iste earum distinctio, fugit, quas ipsa impedit.">
+            <img src="img/gallery/kl-owl.png" alt="" />
+            
+            <div class="child-images">
+              <img src="" alt="" data-description="Description for the first child image">
+              <img src="" alt="" data-description="Description for the second image">
+              <img src="" alt="" data-description="Description for the third image">
+              
+            </div>
+            
+          </div>
+          <div class="item" data-title="Owl" data-secondary="Hoo are you?" data-text="Owel lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure cum, est amet delectus, blanditiis voluptatem laborum pariatur consequatur quae voluptate, nisi. Laborum adipisci iste earum distinctio, fugit, quas ipsa impedit.">
+            <img src="img/gallery/kl-owl.png" alt="" />
+            
+            <div class="child-images">
+              <img src="" alt="" data-description="Description for the first child image">
+              <img src="" alt="" data-description="Description for the second image">
+              <img src="" alt="" data-description="Description for the third image">
+              
+            </div>
+            
+          </div>
+          </div>
+  <div class="gallery">
+    <div class="item" data-title="Owl" data-secondary="Hoo are you?" data-text="Owel lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure cum, est amet delectus, blanditiis voluptatem laborum pariatur consequatur quae voluptate, nisi. Laborum adipisci iste earum distinctio, fugit, quas ipsa impedit.">
+      <img src="img/gallery/kl-owl.png" alt="" />
+      
+      <div class="child-images">
+        <img src="img/gallery/kl-owl.png" alt="" data-description="Description for the first child image">
+        <img src="img/gallery/kl-owl.png" alt="" data-description="Description for the second image">
+        <img src="img/gallery/kl-owl.png" alt="" data-description="Description for the third image">
+        
+      </div>
+      
+    </div>
+    <div class="item" data-title="Deer" data-secondary="Hi deer." data-text="Deer lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure cum, est amet delectus, blanditiis voluptatem laborum pariatur consequatur quae voluptate, nisi. Laborum adipisci iste earum distinctio, fugit, quas ipsa impedit.">
+      <img src="img/gallery/kl-deer.png" alt="" />
+      <div class="child-images">
+        <img src="img/gallery/kl-deer.png" alt="" />
+        <img src="img/gallery/kl-deer.png" alt="" />
+        <img src="img/gallery/kl-deer.png" alt="" />
+       
+      </div>
+    </div>
+    <div class="item" data-title="Hipster" data-secondary="What's new?" data-text="Hipster lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure cum, est amet delectus, blanditiis voluptatem laborum pariatur consequatur quae voluptate, nisi. Laborum adipisci iste earum distinctio, fugit, quas ipsa impedit.">
+      <img src="img/gallery/kl-hipster.png" alt="" />
+      <div class="child-images">
+        <img src="img/gallery/kl-hipster.png" alt="" />
+        <img src="img/gallery/kl-hipster.png" alt="" />
+        <img src="img/gallery/kl-hipster.png" alt="" />
+       
+      </div>
+    </div>
+    <div class="item" data-title="Ram" data-secondary="I just drank a Mountain Dew." data-text="Ram lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure cum, est amet delectus, blanditiis voluptatem laborum pariatur consequatur quae voluptate, nisi. Laborum adipisci iste earum distinctio, fugit, quas ipsa impedit.">
+      <img src="img/gallery/kl-ram.png" alt="" />
+      <div class="child-images">
+        <img src="img/gallery/kl-ram.png" alt="" />
+        <img src="img/gallery/kl-ram.png" alt="" />
+        <img src="img/gallery/kl-ram.png" alt="" />
+       
+      </div>
+    </div>
+    <div class="item" data-title="Dog" data-secondary="I'm trying to sleep here." data-text="Dog lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure cum, est amet delectus, blanditiis voluptatem laborum pariatur consequatur quae voluptate, nisi. Laborum adipisci iste earum distinctio, fugit, quas ipsa impedit.">
+      <img src="img/gallery/kl-dog.png" alt="" />
+      <div class="child-images">
+        <img src="img/gallery/kl-dog.png" alt="" />
+        <img src="img/gallery/kl-dog.png" alt="" />
+        <img src="img/gallery/kl-dog.png" alt="" />
+       
+      </div>
+    </div>
+    <div class="item" data-title="Bored Ram" data-secondary="No time for you." data-text="Ram side lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure cum, est amet delectus, blanditiis voluptatem laborum pariatur consequatur quae voluptate, nisi. Laborum adipisci iste earum distinctio, fugit, quas ipsa impedit.">
+      <img src="img/gallery/kl-sideram.png" alt="" />
+      <div class="child-images">
+        <img src="img/gallery/kl-sideram.png" alt="" />
+        <img src="img/gallery/kl-sideram.png" alt="" />
+        <img src="img/gallery/kl-sideram.png" alt="" />
+      </div>
+    </div>
+    <div class="item" data-title="Super Ram" data-secondary="I have lazer vision." data-text="Ram horns lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure cum, est amet delectus, blanditiis voluptatem laborum pariatur consequatur quae voluptate, nisi. Laborum adipisci iste earum distinctio, fugit, quas ipsa impedit.">
+      <img src="img/gallery/kl-multiram.png" alt="" />
+      <div class="child-images">
+        <img src="img/gallery/kl-multiram.png" alt="" />
+        <img src="img/gallery/kl-multiram.png" alt="" />
+        <img src="img/gallery/kl-multiram.png" alt="" />
+       
+      </div>
+    </div>
+    <div class="item" data-title="Gorilla" data-secondary="I can fit a whole watermelon in my mouth." data-text="Gorrilla lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure cum, est amet delectus, blanditiis voluptatem laborum pariatur consequatur quae voluptate, nisi. Laborum adipisci iste earum distinctio, fugit, quas ipsa impedit.">
+      <img src="img/gallery/kl-gorilla.png" alt="" />
+      <div class="child-images">
+        <img src="img/gallery/kl-gorilla.png" alt="" />
+        <img src="img/gallery/kl-gorilla.png" alt="" />
+        <img src="img/gallery/kl-gorilla.png" alt="" />
+       
+      </div>
+    </div>
+    <div class="item" data-title="Birb" data-secondary="I'm just here to chill." data-text="Birb lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure cum, est amet delectus, blanditiis voluptatem laborum pariatur consequatur quae voluptate, nisi. Laborum adipisci iste earum distinctio, fugit, quas ipsa impedit.">
+      <img src="img/gallery/kl-bird.png" alt="" />
+      <div class="child-images">
+        <img src="img/gallery/kl-bird.png" alt="" />
+        <img src="img/gallery/kl-bird.png" alt="" />
+        <img src="img/gallery/kl-bird.png" alt="" />
+       
+      </div>
+    </div>
+
+    <div class="item" data-title="Owl" data-secondary="Hoo are you?" data-text="Owel lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure cum, est amet delectus, blanditiis voluptatem laborum pariatur consequatur quae voluptate, nisi. Laborum adipisci iste earum distinctio, fugit, quas ipsa impedit.">
+      <img src="img/gallery/kl-owl.png" alt="" />
+      
+      <div class="child-images">
+        <img src="img/gallery/kl-owl.png" alt="">
+        <img src="img/gallery/kl-owl.png" alt="">
+        <img src="img/gallery/kl-owl.png" alt="">
+       
+      </div>
+      
+    </div>
+    <div class="item" data-title="Deer" data-secondary="Hi deer." data-text="Deer lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure cum, est amet delectus, blanditiis voluptatem laborum pariatur consequatur quae voluptate, nisi. Laborum adipisci iste earum distinctio, fugit, quas ipsa impedit.">
+      <img src="img/gallery/kl-deer.png" alt="" />
+      <div class="child-images">
+        <img src="img/gallery/kl-deer.png" alt="" />
+        <img src="img/gallery/kl-deer.png" alt="" />
+        <img src="img/gallery/kl-deer.png" alt="" />
+       
+      </div>
+    </div>
+    <div class="item" data-title="Hipster" data-secondary="What's new?" data-text="Hipster lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure cum, est amet delectus, blanditiis voluptatem laborum pariatur consequatur quae voluptate, nisi. Laborum adipisci iste earum distinctio, fugit, quas ipsa impedit.">
+      <img src="img/gallery/kl-hipster.png" alt="" />
+      <div class="child-images">
+        <img src="img/gallery/kl-hipster.png" alt="" />
+        <img src="img/gallery/kl-hipster.png" alt="" />
+        <img src="img/gallery/kl-hipster.png" alt="" />
+      </div>
+    </div>
+    <div class="item" data-title="Ram" data-secondary="I just drank a Mountain Dew." data-text="Ram lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure cum, est amet delectus, blanditiis voluptatem laborum pariatur consequatur quae voluptate, nisi. Laborum adipisci iste earum distinctio, fugit, quas ipsa impedit.">
+      <img src="img/gallery/kl-ram.png" alt="" />
+      <div class="child-images">
+        <img src="img/gallery/kl-ram.png" alt="" />
+        <img src="img/gallery/kl-ram.png" alt="" />
+        <img src="img/gallery/kl-ram.png" alt="" />
+       
+      </div>
+    </div>
+    <div class="item" data-title="Dog" data-secondary="I'm trying to sleep here." data-text="Dog lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure cum, est amet delectus, blanditiis voluptatem laborum pariatur consequatur quae voluptate, nisi. Laborum adipisci iste earum distinctio, fugit, quas ipsa impedit.">
+      <img src="img/gallery/kl-dog.png" alt="" />
+      <div class="child-images">
+        <img src="img/gallery/kl-dog.png" alt="" />
+        <img src="img/gallery/kl-dog.png" alt="" />
+        <img src="img/gallery/kl-dog.png" alt="" />
+       
+      </div>
+    </div>
+    <div class="item" data-title="Bored Ram" data-secondary="No time for you." data-text="Ram side lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure cum, est amet delectus, blanditiis voluptatem laborum pariatur consequatur quae voluptate, nisi. Laborum adipisci iste earum distinctio, fugit, quas ipsa impedit.">
+      <img src="img/gallery/kl-sideram.png" alt="" />
+      <div class="child-images">
+        <img src="img/gallery/kl-sideram.png" alt="" />
+        <img src="img/gallery/kl-sideram.png" alt="" />
+        <img src="img/gallery/kl-sideram.png" alt="" />
+      </div>
+    </div>
+    <div class="item" data-title="Super Ram" data-secondary="I have lazer vision." data-text="Ram horns lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure cum, est amet delectus, blanditiis voluptatem laborum pariatur consequatur quae voluptate, nisi. Laborum adipisci iste earum distinctio, fugit, quas ipsa impedit.">
+      <img src="img/gallery/kl-multiram.png" alt="" />
+      <div class="child-images">
+        <img src="img/gallery/kl-multiram.png" alt="" />
+        <img src="img/gallery/kl-multiram.png" alt="" />
+        <img src="img/gallery/kl-multiram.png" alt="" />
+      </div>
+    </div>
+    <div class="item" data-title="Gorilla" data-secondary="I can fit a whole watermelon in my mouth." data-text="Gorrilla lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure cum, est amet delectus, blanditiis voluptatem laborum pariatur consequatur quae voluptate, nisi. Laborum adipisci iste earum distinctio, fugit, quas ipsa impedit.">
+      <img src="img/gallery/kl-gorilla.png" alt="" />
+      <div class="child-images">
+        <img src="img/gallery/kl-gorilla.png" alt="" />
+        <img src="img/gallery/kl-gorilla.png" alt="" />
+        <img src="img/gallery/kl-gorilla.png" alt="" />
+      </div>
+    </div>
+    <div class="item" data-title="Birb" data-secondary="I'm just here to chill." data-text="Birb lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure cum, est amet delectus, blanditiis voluptatem laborum pariatur consequatur quae voluptate, nisi. Laborum adipisci iste earum distinctio, fugit, quas ipsa impedit.">
+      <img src="img/gallery/kl-bird.png" alt="" />
+      <div class="child-images">
+        <img src="img/gallery/kl-bird.png" alt="" />
+        <img src="img/gallery/kl-bird.png" alt="" />
+        <img src="img/gallery/kl-bird.png" alt="" />
+      </div>
+    </div>
+
+   
+  </div  > 
+  <div class="text"> 
+    <div>
+      <h1>Diagonal scrolling page demo</h1>
+      <h3> <strong>color palette</strong>
+        generated by
+        <a href="http://coolors.co" target="_blank">coolors.co</a>
+      </h3>
+      <p>
+        This text can be used to test different markup with the <strong>diagonal layout</strong>
+        . The idea is taken from my own webpage. <br/>
+      This is a prototype to make this more compatible and test different markup with this technique. The original version can be viewed at <br/>
+        <a href="http://pixelass.com" target="_blank">http://pixelass.com</a>
+        .
+      </p>
+      <h2>Blockquotes and lists</h2>
+      <blockquote>
+        This is a blockquote. <br/> Someone said something really funny and  <br/>it should be noted here.
+        Aenean massa
+        <strong>strong</strong>
+        . Cum sociis
+        natoque penatibus et magnis dis parturient montes,
+        nascetur ridiculus mus.  <br/>Donec quam felis, ultricies
+        nec, pellentesque eu, pretium quis, sem.  <br/>Nulla consequat
+        massa quis enim. Donec pede justo, fringilla vel,
+        aliquet nec, vulputate eget, arcu. <br/> In <em>em</em>
+        enim justo, rhoncus ut, imperdiet a, venenatis vitae,
+        justo. Nullam
+        <a href="#">link</a>
+        dictum felis eu pede mollis pretium.
+      </blockquote>
+      <ul>
+        <li>This is a list</li>
+        <li>The type is unordered.</li>
+        <li>It will fit in here nicely</li>
+        <li>This actually works pretty well</li>
+        <li>Aenean commodo ligula eget</li>
+        <li>This also works if the text in the list item is too long to fit in one line. <br/> So let's add some bogus text to force at least two or three lines. <br/> Lorem Ipsum to the rescue: Lorem ipsum dolor sit amed.</li>
+    
+      </ul>
+      <p>Ordered lists should work just the same</p>
+      <ol>
+        <li>This is a list</li>
+        <li>The type is ordered.</li>
+        <li>It will fit in here nicely</li>
+        <li>This actually works pretty well</li>
+        <li>Aenean commodo ligula eget</li>
+        <li>Cum sociis natoque penatibus et magnis</li>
+      </ol>
+      <h2>Aenean commodo ligula eget dolor aenean massa</h2>
+      <p>
+        Lorem ipsum dolor sit amet, consectetuer adipiscing
+      elit. Aenean commodo ligula eget dolor.  <br/>Aenean massa.
+      Cum sociis natoque penatibus et magnis dis parturient
+      montes, nascetur ridiculus mus.  <br/>Donec quam felis,
+      ultricies nec, pellentesque eu, pretium quis, sem.
+      </p>
+      <h3>
+        Cum sociis natoque penatibus dis
+      parturient mus
+      </h3>
+      <h4>Donec quam felis ultricies nec pellentesque</h4>
+      <h6>
+        In enim justo rhoncus ut imperdiet a venenatis vitae
+      justo
+      </h6>
+      <p>
+        Lorem ipsum dolor sit amet, consectetuer adipiscing
+      elit. Aenean commodo ligula eget dolor. Aenean massa.
+      Cum sociis natoque penatibus et magnis dis parturient
+      montes, nascetur ridiculus mus. Donec quam felis,
+      ultricies nec, pellentesque eu, pretium quis, sem.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetuer adipiscing
+      elit. Aenean commodo ligula eget dolor. Aenean massa.
+      Cum sociis natoque penatibus et magnis dis parturient
+      montes, nascetur ridiculus mus. Donec quam felis,
+      ultricies nec, pellentesque eu, pretium quis, sem.
+      </p>
+      <blockquote>
+        Lorem ipsum dolor sit amet, consectetuer
+        adipiscing elit. Aenean commodo ligula eget dolor.
+        Aenean massa
+        <strong>strong</strong>
+        . Cum sociis
+        natoque penatibus et magnis dis parturient montes,
+        nascetur ridiculus mus. Donec quam felis, ultricies
+        nec, pellentesque eu, pretium quis, sem. Nulla consequat
+        massa quis enim. Donec pede justo, fringilla vel,
+        aliquet nec, vulputate eget, arcu. In <em>em</em>
+        dictum felis eu pede mollis pretium.
+      </blockquote>
+      <p>
+        Lorem ipsum dolor sit amet, consectetuer adipiscing
+      elit. Aenean commodo ligula eget dolor. Aenean massa.
+      Cum sociis natoque penatibus et magnis dis parturient
+      montes, nascetur ridiculus mus. Donec quam felis,
+      ultricies nec, pellentesque eu, pretium quis, sem.
+      </p>
+      <blockquote>
+        Lorem ipsum dolor sit amet, consectetuer
+        adipiscing elit. Aenean commodo ligula eget dolor.
+        Aenean massa
+        <strong>strong</strong>
+        . Cum sociis
+        natoque penatibus et magnis dis parturient montes,
+        nascetur ridiculus mus. Donec quam felis, ultricies
+        nec, pellentesque eu, pretium quis, sem. Nulla consequat
+        massa quis enim. Donec pede justo, fringilla vel,
+        aliquet nec, vulputate eget, arcu. In <em>em</em>
+        dictum felis eu pede mollis pretium.
+      </blockquote>
+      <p>
+        Lorem ipsum dolor sit amet, consectetuer adipiscing
+      elit. Aenean commodo ligula eget dolor. Aenean massa.
+      Cum sociis natoque penatibus et magnis dis parturient
+      montes, nascetur ridiculus mus. Donec quam felis,
+      ultricies nec, pellentesque eu, pretium quis, sem.
+      </p>
+      
+      <h3>
+        Cum sociis natoque penatibus dis
+      parturient mus
+      </h3>
+      <h4>Donec quam felis ultricies nec pellentesque</h4>
+   
+      <p>
+        Lorem ipsum dolor sit amet, consectetuer adipiscing
+      elit. Aenean commodo ligula eget dolor. Aenean massa.
+      Cum sociis natoque penatibus et magnis dis parturient
+      montes, nascetur ridiculus mus. Donec quam felis,
+      ultricies nec, pellentesque eu, pretium quis, sem.
+      </p>
+      <p>Ordered lists should work just the same</p>
+      <ol>
+        <li>This is a list</li>
+        <li>The type is ordered.</li>
+        <li>It will fit in here nicely</li>
+        <li>This actually works pretty well</li>
+        <li>Aenean commodo ligula eget</li>
+        <li>Cum sociis natoque penatibus et magnis</li>
+      </ol>
+      <h2>Aenean commodo ligula eget dolor aenean massa</h2>
+      <p>
+        Lorem ipsum dolor sit amet, consectetuer adipiscing
+      elit. Aenean commodo ligula eget dolor.  <br/>Aenean massa.
+      Cum sociis natoque penatibus et magnis dis parturient
+      montes, nascetur ridiculus mus.  <br/>Donec quam felis,
+      ultricies nec, pellentesque eu, pretium quis, sem.
+      </p>
+      <h3>
+        Cum sociis natoque penatibus dis
+      parturient mus
+      </h3>
+      <h4>Donec quam felis ultricies nec pellentesque</h4>
+      <h6>
+        In enim justo rhoncus ut imperdiet a venenatis vitae
+      justo
+      </h6>
+      <p>
+        Lorem ipsum dolor sit amet, consectetuer adipiscing
+      elit. Aenean commodo ligula eget dolor. Aenean massa.
+      Cum sociis natoque penatibus et magnis dis parturient
+      montes, nascetur ridiculus mus. Donec quam felis,
+      ultricies nec, pellentesque eu, pretium quis, sem.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetuer adipiscing
+      elit. Aenean commodo ligula eget dolor. Aenean massa.
+      Cum sociis natoque penatibus et magnis dis parturient
+      montes, nascetur ridiculus mus. Donec quam felis,
+      ultricies nec, pellentesque eu, pretium quis, sem.
+      </p>
+     
+    </div>
+    
+  </div>
+  <div class="plantext"> 
+    <div>
+      <h1>Diagonal scrolling page demo</h1>
+      
+      <h2>Aenean commodo ligula eget dolor aenean massa</h2>
+    
+      <p>
+        Lorem ipsum dolor sit amet, consectetuer adipiscing
+      elit. Aenean commodo ligula eget dolor. Aenean massa.
+      Cum sociis natoque penatibus et magnis dis parturient
+      montes, nascetur ridiculus mus. Donec quam felis,
+      ultricies nec, pellentesque eu, pretium quis, sem.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetuer adipiscing
+      elit. Aenean commodo ligula eget dolor. Aenean massa.
+      Cum sociis natoque penatibus et magnis dis parturient
+      montes, nascetur ridiculus mus. Donec quam felis,
+      ultricies nec, pellentesque eu, pretium quis, sem.
+      </p>
+      <blockquote>
+        Lorem ipsum dolor sit amet, consectetuer
+        adipiscing elit. Aenean commodo ligula eget dolor.
+        Aenean massa
+        <strong>strong</strong>
+        . Cum sociis
+        natoque penatibus et magnis dis parturient montes,
+        nascetur ridiculus mus. Donec quam felis, ultricies
+        nec, pellentesque eu, pretium quis, sem. Nulla consequat
+        massa quis enim. Donec pede justo, fringilla vel,
+        aliquet nec, vulputate eget, arcu. In <em>em</em>
+        dictum felis eu pede mollis pretium.
+      </blockquote>
+      <p>
+        Lorem ipsum dolor sit amet, consectetuer adipiscing
+      elit. Aenean commodo ligula eget dolor. Aenean massa.
+      Cum sociis natoque penatibus et magnis dis parturient
+      montes, nascetur ridiculus mus. Donec quam felis,
+      ultricies nec, pellentesque eu, pretium quis, sem.
+      </p>
+      <blockquote>
+        Lorem ipsum dolor sit amet, consectetuer
+        adipiscing elit. Aenean commodo ligula eget dolor.
+        Aenean massa
+        <strong>strong</strong>
+        . Cum sociis
+        natoque penatibus et magnis dis parturient montes,
+        nascetur ridiculus mus. Donec quam felis, ultricies
+        nec, pellentesque eu, pretium quis, sem. Nulla consequat
+        massa quis enim. Donec pede justo, fringilla vel,
+        aliquet nec, vulputate eget, arcu. In <em>em</em>
+        dictum felis eu pede mollis pretium.
+      </blockquote>
+      <p>
+        Lorem ipsum dolor sit amet, consectetuer adipiscing
+      elit. Aenean commodo ligula eget dolor. Aenean massa.
+      Cum sociis natoque penatibus et magnis dis parturient
+      montes, nascetur ridiculus mus. Donec quam felis,
+      ultricies nec, pellentesque eu, pretium quis, sem.
+      </p>
+      <blockquote>
+        Lorem ipsum dolor sit amet, consectetuer
+        adipiscing elit. Aenean commodo ligula eget dolor.
+        Aenean massa
+        <strong>strong</strong>
+        . Cum sociis
+        natoque penatibus et magnis dis parturient montes,
+        nascetur ridiculus mus. Donec quam felis, ultricies
+        nec, pellentesque eu, pretium quis, sem. Nulla consequat
+        massa quis enim. Donec pede justo, fringilla vel,
+        aliquet nec, vulputate eget, arcu. In <em>em</em>
+        dictum felis eu pede mollis pretium.
+      </blockquote>
+      <p>
+        Lorem ipsum dolor sit amet, consectetuer adipiscing
+      elit. Aenean commodo ligula eget dolor. Aenean massa.
+      Cum sociis natoque penatibus et magnis dis parturient
+      montes, nascetur ridiculus mus. Donec quam felis,
+      ultricies nec, pellentesque eu, pretium quis, sem.
+      </p>
+     
+      <blockquote>
+    
+   
+</div>
+
+
+<div class="team-info">
+    <div class="heading-team">
+      Overview
+    </div>
+    <div class="team-listitems">
+      <ul>
+        <li>Contact</li>
+        <li>About Us</li>
+        <li>Address</li>
+        <li>Team</li>
+        <li>ListItem</li>
+      </ul>
+    </div>
+  
+  </div>
+  
+
+
+
+<div class="detail">
+  <img/>
+
+  <div class="content">
+    <button class="close-button">Back</button>
+    <div class="row">
+      <div class="column">
+        
+        <div class="swiper-container">
+           <div class="swiper">
+        <div class="swiper-wrapper">
+       
+        </div>
+    
+        <div class="swiper-pagination"></div>
+   
+        
+       
+      </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="title">Placeholder title</div>
+        <div class="secondary">Placeholder secondary</div>
+        <div class="description">Placeholder description</div>
+      </div>
+  
+    </div>
+    
+  </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/gsap-latest-beta.min.js"></script>
+  <script src="https://assets.codepen.io/16327/Flip.min.js"></script>
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/7.0.1/swiper-bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const app = document.querySelector('.app');
+      const gallery = document.querySelector('.gallery');
+      const text = document.querySelector('.text');
+
+      app.addEventListener('scroll', () => {
+        const appScrollTop = app.scrollTop;
+        const appClientHeight = app.clientHeight;
+        const galleryHeight = gallery.scrollHeight;
+
+        // Determine the maximum scroll position for gallery
+        const maxGalleryScroll = galleryHeight - appClientHeight;
+
+        // Update gallery scroll position
+        if (appScrollTop <= maxGalleryScroll) {
+          gallery.scrollTop = appScrollTop * 3; // Fast scrolling for gallery
+        } else {
+          gallery.scrollTop = maxGalleryScroll;
+        }
+
+        // Calculate scroll position for text based on app scroll
+        const textScrollTop = (appScrollTop - maxGalleryScroll) * 2; // Slow down scrolling for text
+        text.scrollTop = textScrollTop;
+      });
+    });
+  </script>
+  
+  
+  
+  
+  
+  
+  <script>
+    const items = gsap.utils.toArray(".item"),
+        details = document.querySelector('.detail'),
+        detailContent = document.querySelector('.content'),
+        detailImage = document.querySelector('.detail img'),
+        detailTitle = document.querySelector('.detail .title'),
+        detailSecondary = document.querySelector('.detail .secondary'),
+        detailDescription = document.querySelector('.detail .description');
+
+    let activeItem; // keeps track of which item is open (details)
+
+    gsap.set(detailContent, { yPercent: -100 }); // close the details "drawer" (content) initially
+
+
+
+function showDetails(item) {
+    // if (activeItem) {
+    //   return hideDetails();
+    // }
+
+    let onLoad = () => {
+        // Collect all child images within the item
+        const childImages = Array.from(item.querySelectorAll('.child-images img')).map(img => img.src);
+
+        // Append child images to the swiper container
+        const swiperWrapper = document.querySelector('.swiper-wrapper');
+        swiperWrapper.innerHTML = ''; // Clear existing slider content
+        childImages.forEach(src => {
+            const slide = document.createElement('div');
+            slide.classList.add('swiper-slide');
+            slide.innerHTML = `<img src="${src}" alt="">`;
+            swiperWrapper.appendChild(slide);
+        });
+
+        Flip.fit(details, item, { scale: true, fitChild: detailImage });
+        const state = Flip.getState(details);
+        gsap.set(details, { clearProps: true });
+        gsap.set(details, { xPercent: -50, top: "50%", yPercent: -50, visibility: "visible", overflow: "hidden" });
+        Flip.from(state, {
+            duration: 0.5,
+            ease: "power2.inOut",
+            scale: true,
+            onComplete: () => gsap.set(details, { overflow: "auto" }) // to permit scrolling if necessary
+        })
+            // Flip.from() returns a timeline, so add a tween to reveal the detail content. That way, if the flip gets interrupted and forced to completion & killed, this does too.
+            .to(detailContent, { yPercent: 0 }, 0.2);
+
+        detailImage.removeEventListener("load", onLoad);
+        // document.addEventListener('click', hideDetails);
+
+        document.addEventListener('click', documentClickHandler);
+    };
+
+    const data = item.dataset;
+    detailImage.addEventListener("load", onLoad);
+    detailImage.src = item.querySelector('img').src;
+    detailTitle.innerText = data.title;
+    detailSecondary.innerText = data.secondary;
+    detailDescription.innerText = data.text;
+
+    gsap.to(items, { opacity: 0.3, stagger: { amount: 0.7, from: items.indexOf(item), grid: "auto" } }).kill(item);
+    gsap.to(".app", { backgroundColor: "#888", duration: 1, delay: 0.3 });
+    activeItem = item;
+}
+
+
+
+
+function hideDetails(event) {
+  if (event) event.stopPropagation(); // Prevent propagation to avoid triggering unintended events
+
+  if (!activeItem) return; // Ensure activeItem is defined
+
+  // Show the image briefly
+  gsap.set(detailImage, { autoAlpha: 1 });
+  detailImage.style.display = 'block';
+
+  // Wait for 2 seconds before hiding the details
+  setTimeout(() => {
+    // Hide the details
+    document.removeEventListener('click', hideDetails);
+    gsap.set(details, { overflow: "hidden" });
+    const state = Flip.getState(details);
+    Flip.fit(details, activeItem, { scale: true, fitChild: detailImage });
+    const tl = gsap.timeline();
+    tl.set(details, { overflow: "hidden" })
+      .to(detailContent, { yPercent: -100 })
+      .to(items, { opacity: 1, stagger: { amount: 0.7, from: items.indexOf(activeItem), grid: "auto" } })
+      .to(".app", { backgroundColor: "black" }, "<");
+
+    Flip.from(state, {
+      scale: true,
+      duration: 0.5,
+      ease: "power2.inOut",
+      onInterrupt: () => tl.kill(),
+      onComplete: () => {
+        gsap.set(details, { visibility: "hidden" });
+        // Hide the image
+        gsap.to(detailImage, {
+          autoAlpha: 0,
+          duration: 0.0001,
+          onComplete: () => {
+            detailImage.style.display = 'none';
+            activeItem = null;
+          }
+        });
+      }
+    });
+  }, 200); // Show the image for 2 seconds
+}
+
+
+function documentClickHandler(event) {
+        if (!details.contains(event.target)) {
+            hideDetails();
+        }
+    }
+
+
+    var swiper = new Swiper('.swiper', {
+      direction: 'horizontal',
+      loop: true,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+    });
+
+    // Add click listeners
+    gsap.utils.toArray('.item').forEach(item => item.addEventListener('click', (event) => {
+      event.stopPropagation(); // Prevent propagation to avoid triggering unintended events
+      showDetails(item);
+    }));
+    document.querySelector('.close-button').addEventListener('click', hideDetails);
+
+    // Intro animation
+    window.addEventListener('load', () => {
+      gsap.to('.app', { autoAlpha: 1, duration: 0.2 });
+      gsap.from('.item', { autoAlpha: 0, yPercent: 30, stagger: 0.04 });
+    });
+  </script>
+
+</body>
+</html>
