@@ -219,33 +219,110 @@ img {
   margin-left: 60px;
 }
 
-.heading-team{
+/* overview style */ 
+
+/* .heading-team{
+    color:red;
+    font-weight: bold;
     transform-style: preserve-3d;
     font-size: 120px;
-      transform: translateX(8vw) translateY(130px) rotateX(-30deg) rotateZ(-118deg);
-}
+    transform: translateX(10vw) translateY(0vw) rotateZ(60deg) rotateY(0deg);
+  }
 .team-info{
   display: flex;
   font-size: 80px;
   align-items: center;
+  font-weight: 400;
   margin-left: 8vw;
 }
 .team-info ul{
   list-style-type: none;
   text-decoration: underline;
+  text-decoration-thickness: 1px ;
 }
+
 .team-listitems{
-  transform: rotateZ(-30deg);
+  transform: rotateZ(-30deg) rotateY(-15deg); 
+} */
+
+
+
+.heading-team {
+  color: red;
+  font-weight: bold;
+  transform-style: preserve-3d;
+  font-size: 120px;
+  transform: translateX(40px) translateY(500px) 
+        perspective(490px)
+        rotateX(11deg)
+        rotateY(-1deg)
+        rotateZ(52deg)
+          }
+
+.team-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 80px;
+  font-weight: 400;
+  margin-left: 8vw;
 }
+
+.team-listitems ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.team-listitems ul li {
+  position: relative;
+  margin: 50px 0;
+  color: white;
+}
+
+.team-listitems ul li::after {
+  content: '';
+  position: absolute;
+  left: 60%;
+  bottom: -10px;
+  transform: translateX(-50%);
+  width: 450px; /* Adjust this value as necessary */
+  height: 2px; /* Adjust this value as necessary */
+  background-color: white;
+}
+
+.team-listitems {
+  transform: 
+        translateX(500px)
+        perspective(490px)
+        rotateX(24deg)
+        rotateY(14deg)
+        rotateZ(-44deg)
+        }
+
+.item img:hover{
+  transform: scale(1.2);
+}
+  
+
+
 /* PROJECTS SECTION */
+.project-card{
+  padding: 10px;
+  
+
+}
+.project-img{
+    text-align: center;
+}
 .projects-section{
-    margin-top: 10vh;
+    margin-top: 15vh;
       display: grid;
       grid-template-columns: repeat(3, 1fr);                      
       gap: 0 3.6%;
       padding: 20px;
       transform-style: preserve-3d;
-      transform: translateX(20vw) translateY(5px) rotateX(30deg) rotateZ(-30deg);
+      transform: rotateX(20deg) rotateZ(-20deg) rotateY(20deg) perspective(500px);
+      margin-left: 30%;
       overflow: hidden;
       max-width: 50%;
       min-height: 60vh;
@@ -259,14 +336,214 @@ img {
 }
 
 /* Hover animation */
-.item:hover img {
-    transform: scale(1.2);
+
+
+
+.project-card:hover{
+  transform: scale(1.2);
+
 }
 
 
 
 
 
+/* Project name and category styles */
+
+.project-info {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  padding: 10px;
+}
+
+.project-title {
+  margin: 0;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.project-category {
+  margin: 5px 0;
+  font-size: 20px;
+}
+.projects-section .item .project-info{
+  background-color: #2c2b2b;
+
+    
+}
+
+/* li  underline */
+
+/* ABOUT PAGE STYLING */ 
+
+      ul li {
+        list-style-type: none;
+      }
+      ul li {
+        list-style-type: none;
+        position: relative; /* Needed for correct positioning of the underline */
+        padding: 10px; /* Adjust padding as needed */
+        margin-top: 40px;
+      }
+
+      ul li::after {
+        content: ""; /* Empty content to create the underline */
+        position: absolute;
+        bottom: 0; /* Place the underline at the bottom of the li */
+        left: 0; /* Start the underline at the left edge */
+        width: 420px; /* Set the width to 100% of the li element */
+        height: 2px; /* Adjust the height of the underline */
+        background-color: #ccc; /* Change the background color of the underline */
+      }
+      .about-page {
+        display: flex;
+      }
+      .about-heading {
+        font-size: 100px;
+        font-weight: bold;
+        transform: translateY(-10vh) rotate(90deg);
+        color: red; 
+      }
+      .about-list {
+        font-size: 80px;
+        margin-left: 10vw;
+      }
+      .about-page {
+        transform: rotate(-36deg) scaleY(0.83) skew(25deg, 21deg);
+    }
+
+    li:hover{
+        transition: transform 0.3s ease-in-out;
+        transform: scale(1.4);
+    }
+
+
+    /* DIRECTORS */
+
+    .directors-page{
+            margin-top: 5vh;
+            display: flex;
+        }
+        .directors-heading{
+        font-size: 90px;
+        font-weight: bold;
+        transform: rotateX(25deg) rotate(271deg) translateX(-5vw) scale(1,1.7) translateY(52vh) skew(-25deg, 0deg);
+    }
+        .directors-gallery{
+            display: grid;
+            margin-left: 200px;
+            grid-template-columns: repeat(2,1fr);
+            grid-template-rows: repeat(3,1fr);
+            gap: 20px;
+            transform: translate(0px, 0px) skew(-1deg, -4deg);
+            /* edit */
+        }
+        .directors-info{
+            padding: 20px;
+        }
+        .directors-card{
+      
+            display: flex;
+            background-color: rgb(54, 54, 54);
+        }
+        .directors-info h2{
+            color:red
+        }
+        .directors-img img{
+            height: 200px;
+            width: 200px; /* to remove this image style */
+        }
+        .directors-card:hover{
+        transition: transform 0.3s ease-in-out;
+        transform: scale(1.4);}
+        
+        .directorssection{
+          margin-left: -15vw;
+        }
+
+
+          /* GET IN TOUCH */
+
+
+        
+        .scene {
+        perspective: 1000px;
+        margin-top: 10vw;
+        
+    }
+
+    .cube {
+        position: relative;
+        width: 70vmin;
+        height: 70vmin;
+        transform-style: preserve-3d;
+        transform: rotateX(49deg) rotateY(4deg) rotateZ(49deg);
+        margin-left: 30vw ;
+        margin-top: 40vh;
+    }
+
+    .face {
+        position: absolute;
+        width: 70vmin;
+        height: 70vmin;
+        background: #121212;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-sizing: border-box;
+        padding: 10px;
+        overflow: hidden;
+        color: white;
+    }
+
+    .front  { transform: translateZ(35vmin) rotateY(10deg) ; }
+    .back   { transform: rotateY(180deg) translateZ(35vmin); }
+    .left   { transform: rotateY(-90deg) translateZ(35vmin); }
+    .right  { background-color: #3d3c3c; height: 30vmin; width: 38vmin; transform: translateX(26vmin) translateY(34vmin)  rotateY(100deg) translateZ(17vmin); }
+    .top    { transform: rotateX(90deg) translateZ(35vmin); }
+    .bottom { background-color: #272626; width: 62vmin; height: 24vmin; transform: rotateY(10deg) rotateX(-90deg) translateX(3vmin) translateY(-25vmin) translateZ(61vmin); }
+
+    .getintouch-page {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        box-sizing: border-box;
+    }
+    .get-heading h1{
+        color: red;
+                font-weight: 800;
+    }
+    .background {
+        background: #121212;
+        padding: 10px;
+        box-sizing: border-box;
+        margin: 10px 0;
+    }
+
+    .get-heading {
+        font-size: 2.5vmin;
+    }
+    
+    .get-message,
+    .get-callvisit {
+        font-size: 2vmin;
+    }
+
+    .get-callvisit {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .get-call, .get-visit {
+        width: 45%;
+    }
+    
   </style>
 </head>
 <body>
@@ -278,8 +555,35 @@ img {
     <div class="projects-section"> 
       
         <div class="item" data-title="Owl" data-secondary="Hoo are you?" data-text="Owel lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure cum, est amet delectus, blanditiis voluptatem laborum pariatur consequatur quae voluptate, nisi. Laborum adipisci iste earum distinctio, fugit, quas ipsa impedit.">
-            <img src="img/gallery/kl-owl.png" alt="" />
+           
+          
+          <div class="project-card">
+              <img src="img/gallery/kl-owl.png" alt="" />
+            <div class="project-info">
+                <h3 class="project-title">Project <br> Name</h3>
+                <p class="project-category">Category</p>
+              </div>
+            </div>
             
+            
+            <div class="child-images">
+              <img src="img/gallery/kl-owl.png" alt="" data-description="Description for the first child image">
+              <img src="img/gallery/kl-owl.png" alt="" data-description="Description for the second image">
+              <img src="img/gallery/kl-owl.png" alt="" data-description="Description for the third image">
+              
+            </div>
+            <div>
+              
+            </div>
+          </div>
+          <div class="item" data-title="Owl" data-secondary="Hoo are you?" data-text="Owel lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure cum, est amet delectus, blanditiis voluptatem laborum pariatur consequatur quae voluptate, nisi. Laborum adipisci iste earum distinctio, fugit, quas ipsa impedit.">
+            <div class="project-card">
+              <img src="img/gallery/kl-owl.png" alt="" />
+            <div class="project-info">
+                <h3 class="project-title">Project <br> Name</h3>
+                <p class="project-category">Category</p>
+              </div>
+            </div>
             <div class="child-images">
               <img src="" alt="" data-description="Description for the first child image">
               <img src="" alt="" data-description="Description for the second image">
@@ -289,8 +593,13 @@ img {
             
           </div>
           <div class="item" data-title="Owl" data-secondary="Hoo are you?" data-text="Owel lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure cum, est amet delectus, blanditiis voluptatem laborum pariatur consequatur quae voluptate, nisi. Laborum adipisci iste earum distinctio, fugit, quas ipsa impedit.">
-            <img src="img/gallery/kl-owl.png" alt="" />
-            
+            <div class="project-card">
+              <img src="img/gallery/kl-owl.png" alt="" />
+            <div class="project-info">
+                <h3 class="project-title">Project <br> Name</h3>
+                <p class="project-category">Category</p>
+              </div>
+            </div>
             <div class="child-images">
               <img src="" alt="" data-description="Description for the first child image">
               <img src="" alt="" data-description="Description for the second image">
@@ -299,18 +608,15 @@ img {
             </div>
             
           </div>
-          <div class="item" data-title="Owl" data-secondary="Hoo are you?" data-text="Owel lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure cum, est amet delectus, blanditiis voluptatem laborum pariatur consequatur quae voluptate, nisi. Laborum adipisci iste earum distinctio, fugit, quas ipsa impedit.">
-            <img src="img/gallery/kl-owl.png" alt="" />
-            
-            <div class="child-images">
-              <img src="" alt="" data-description="Description for the first child image">
-              <img src="" alt="" data-description="Description for the second image">
-              <img src="" alt="" data-description="Description for the third image">
-              
-            </div>
-            
           </div>
-          </div>
+
+          <!--                              ABOUT US SECTION              -->
+
+       
+
+
+
+
   <div class="gallery">
     <div class="item" data-title="Owl" data-secondary="Hoo are you?" data-text="Owel lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure cum, est amet delectus, blanditiis voluptatem laborum pariatur consequatur quae voluptate, nisi. Laborum adipisci iste earum distinctio, fugit, quas ipsa impedit.">
       <img src="img/gallery/kl-owl.png" alt="" />
@@ -740,25 +1046,152 @@ img {
 </div>
 
 
-<div class="team-info">
-    <div class="heading-team">
-      Overview
-    </div>
-    <div class="team-listitems">
-      <ul>
-        <li>Contact</li>
-        <li>About Us</li>
-        <li>Address</li>
-        <li>Team</li>
-        <li>ListItem</li>
-      </ul>
-    </div>
-  
+<!-- ABOUT PAGE --> 
+
+<div class="about-page">
+  <div class="about-heading">ABOUT US</div>
+  <div class="about-list">
+    <ul>
+      <li>Overview</li>
+      <li>Philosophy</li>
+      <li>Milestone</li>
+      <li>Projects</li>
+      <li>Team</li>
+    </ul>
   </div>
+</div>
+
+<!-- DIRECTORS -->
+<div class="directorssection">
+  <div class="directors-page">
+    <div class="directors-heading">
+        DIRECTORS
+    </div>
+    <div class="directors-gallery">
+        <div class="directors-card">
+            <div class="directors-img">
+                <img src="img/gallery/kl-owl.png" alt="" srcset="">
+            </div>
+            <div class="directors-info">
+                <h2>Name</h2>
+                <h3>designation</h3>
+                <p>Lorem ipsum dolor sit.</p>
+            </div>
+        </div>
   
+        <div class="directors-card">
+            <div class="directors-img">
+                <img src="img/gallery/kl-owl.png" alt="" srcset="">
+            </div>
+            <div class="directors-info">
+                <h2>Name</h2>
+                <h3>designation</h3>
+                <p>Lorem ipsum dolor sit.</p>
+            </div>
+        </div>
+  
+        <div class="directors-card">
+            <div class="directors-img">
+                <img src="img/gallery/kl-owl.png" alt="" srcset="">
+            </div>
+            <div class="directors-info">
+                <h2>Name</h2>
+                <h3>designation</h3>
+                <p>Lorem ipsum dolor sit.</p>
+            </div>
+        </div>
+  
+        <div class="directors-card">
+            <div class="directors-img">
+                <img src="img/gallery/kl-owl.png" alt="" srcset="">
+            </div>
+            <div class="directors-info">
+                <h2>Name</h2>
+                <h3>designation</h3>
+                <p>Lorem ipsum dolor sit.</p>
+            </div>
+        </div>
+  
+  
+        <div class="directors-card">
+            <div class="directors-img">
+                <img src="img/gallery/kl-owl.png" alt="" srcset="">
+            </div>
+            <div class="directors-info">
+                <h2>Name</h2>
+                <h3>designation</h3>
+                <p>Lorem ipsum dolor sit.</p>
+            </div>
+        </div>
+  
+        <div class="directors-card">
+            <div class="directors-img">
+                <img src="img/gallery/kl-owl.png" alt="" srcset="">
+            </div>
+            <div class="directors-info">
+                <h2>Name</h2>
+                <h3>designation</h3>
+                <p>Lorem ipsum dolor sit.</p>
+            </div>
+        </div>
+    </div>
+  </div>  
+</div>
 
 
+<!-- GET IN TOUCH -->
 
+<div class="scene">
+  <div class="cube">
+      <div class="face front">
+          <div class="getintouch-page">
+              <div class="get-heading background">
+                  <h1>GET IN TOUCH</h1>
+              </div>
+      
+      
+          <div class="get-message background">
+              <h2>Send us a message</h2>
+              
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing. <br>
+              Lorem ipsum dolor sit amet consectetur.</p>
+              <br>
+              info@neomodernarch.com
+          </div>
+      
+          <div class="get-callvisit background">
+      
+              <div class="get-call">
+                  <h2>Call Us</h2>
+              <br>
+              <p>Lorem ipsum dolor sit amet. <br>
+              Lorem ipsum dolor sit amet. </p> 
+              <h2>022 66130100</h2>
+                  </div>
+              <div class="get-visit">
+                  <h2>Visit Us</h2>
+                  <br>
+                  <p> Lorem ipsum dolor sit amet. <br>
+                      Lorem ipsum dolor sit amet. <br>
+                      Lorem ipsum dolor sit amet. <br>    
+                      Mumbai Maharastra.
+      
+                  </p>
+              </div>
+          </div>
+          </div>
+
+
+      </div>
+      
+
+      <div class="face right">Right</div>
+
+      <div class="face bottom">Bottom</div>
+
+
+  </div>
+</div>
 <div class="detail">
   <img/>
 
@@ -970,7 +1403,12 @@ function documentClickHandler(event) {
     window.addEventListener('load', () => {
       gsap.to('.app', { autoAlpha: 1, duration: 0.2 });
       gsap.from('.item', { autoAlpha: 0, yPercent: 30, stagger: 0.04 });
+      
+        
     });
+
+    
+    
   </script>
 
 </body>
